@@ -131,7 +131,8 @@ Exibir a tabela de roteamento
 #show ip route
 Criação de Subinterface e atrelamento dela a uma VLAN
 
-Para configurar uma Subinterface, basta colocar um ponto no final do nome da Interface onde você quer criar a Subinterface, após o ponto digite o ID da Subinterface, lembrando que o ID da Subinterface normalmente é o ID da VLAN a qual essa Subinterface será atrelada.
+Para configurar uma Subinterface, basta colocar um ponto no final do nome da Interface onde você quer criar a Subinterface, 
+após o ponto digite o ID da Subinterface, lembrando que o ID da Subinterface normalmente é o ID da VLAN a qual essa Subinterface será atrelada.
 
 No exemplo abaixo vamos criar a Subinterface .10 na Interface g0/0 e atrelar ela a VLAN 10
 
