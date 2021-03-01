@@ -1,29 +1,29 @@
-Comandos Cisco IOS
+# Comandos Cisco IOS
 Esse são os comandos utilizados em sala de aula, USE como consulta caso esteja em dúvida em alguma configuração.
 
-Configurações Iniciais (Switch e Router)
+## Configurações Iniciais (Switch e Router)
 Entrar no modo Exec Privilegiado
 
 >enable
 Mostrar as configurações que estão ativas no equipamentos
 
-#show running-config
+## #show running-config
 Mostrar as configurações que estão salvas no equipamentos
 
-#show startup-config
+## #show startup-config
 Salvas as configurações que estão do equipamentos
 
-#copy running-config startup-config
+## #copy running-config startup-config
 ou
-#write memory
+## #write memory
 ou
-#wr
+## #wr
 Reiniciar o equipamento
 
-#reload
+## #reload
 Apagar todas as configurações salvas
 
-#write erase
+## #write erase
 Destravar o terminal
 
 Ctrl+Shift+6
@@ -46,7 +46,8 @@ Inserir senha na console
 (config)#line console [número-da-console]
 (config-line)#password [senha]
 (config-line)#login
-Encriptar todas as senhas que estão em texto plano
+
+## Encriptar todas as senhas que estão em texto plano
 
 (config)#service password-encryption
 Anular qualquer commando no CISCO IOS
