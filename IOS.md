@@ -319,3 +319,39 @@ ou
 ```
 #delete vlan.dat
 ```
+
+## Spanning Tree 
+
+**Aqui identificamos se o switch é root bridge da VLAN**
+```
+#show spanning-tree vlan 10
+```
+
+**Filtro para buscar porta FastEthernet dentro das Interfaces**
+```
+# show interfaces | in FastEthernet 
+```
+
+**Ver todas as interfaces conectadas do Spanning-tree**
+```
+#show spanning-tree detail
+ ```
+
+**Ver MAC somente das interfaces conectadas e ativas**
+```
+#show mac-address-table
+```
+
+**Ver MAC somente das interfaces conectadas e não ativas**
+```
+# show interfaces | in line protocol | address
+```
+**Mudar o Switch (Root Bridge) - Verificar qual a prioridade do Root ID antes de mudar**
+```
+(config)# spanning-tree vlan 1 priority 28672
+```
+
+**Mudar o Switch RootBrigde**
+```
+(config)#spanning-tree vlan 1,10 root primary
+```
