@@ -324,7 +324,7 @@ ou
 
 **Aqui identificamos se o switch é root bridge da VLAN**
 ```
-#show spanning-tree vlan 10
+#show spanning-tree vlan [id-da-vlan]
 ```
 
 **Filtro para buscar porta FastEthernet dentro das Interfaces**
@@ -348,10 +348,10 @@ ou
 ```
 **Mudar o Switch (Root Bridge) - Verificar qual a prioridade do Root ID antes de mudar**
 ```
-(config)# spanning-tree vlan 1 priority 28672
+(config)#spanning-tree vlan 1 priority 28672
 ```
 
 **Mudar o Switch RootBrigde**
 ```
-(config)#spanning-tree vlan 1,10 root primary
+(config)#spanning-tree vlan [id's-da-vlan] root primary
 ```
