@@ -348,7 +348,7 @@ ou
 ```
 **Mudar o Switch (Root Bridge) - Verificar qual a prioridade do Root ID antes de mudar**
 ```
-(config)#spanning-tree vlan 1 priority 28672
+(config)#spanning-tree vlan [id-da-vlan] priority 28672
 ```
 
 **Mudar o Switch RootBrigde**
