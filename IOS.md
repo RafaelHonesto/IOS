@@ -355,3 +355,74 @@ ou
 ```
 (config)#spanning-tree vlan [id's-da-vlan] root primary
 ```
+
+##Etherchannel
+
+**Visualizar Portas**
+```
+#show ip int brief
+```
+
+**Visualizar Canal Etherchannel**
+```
+#show etherchannel summary
+```
+**Visualizar Canal Etherchannel por Porta**
+```
+#show etherchannel 
+```
+
+**Mostram o port channel como um link lógico.**
+```
+#show interfaces trunk 
+#show spanning-tree 
+```
+
+
+**Configurar Link Aggreggation LACP**
+```
+(config)# interface range gigabitEthernet 1/1-2
+(config-if)# channel-protocol lacp
+(config-if)# channel-group 1 mode active
+ou
+(config-if)# channel-group 1 mode passive
+```
+
+**Configurar Link Aggreggation PAgP**
+```
+(config)# interface range gigabitEthernet 1/1-2
+```
+```
+(config-if)# channel-protocol pagp
+```
+```
+(config-if)# channel-group 1 mode auto
+ou
+(config-if)# channel-group 1 mode desirable
+```
+**Status das Portas**
+```
+#show port-channel summary
+
+Sinalizadores: 
+D - Down (desligado)
+P - port-channel está Up (ligado) (membros estão funcionais)
+I - Individual 
+H - Hot-standby (Link em espera) (somente LACP)
+s - recurso suspenso - módulo removido
+S - Comutado 
+R - Roteado
+U – Up (ligado) (canal lógico)
+
+interface GigabitEthernet1/1
+ channel-protocol lacp
+ channel-group 1 mode active
+!
+interface GigabitEthernet1/2
+ channel-protocol lacp
+ channel-group 1 mode active
+!
+interface Port-channel 1
+```
+Observar que foi criada uma interfadce virtual chamada Port-channel 1
+Toda mudança é feita na porta "Port-channel 1"
