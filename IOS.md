@@ -426,3 +426,60 @@ interface Port-channel 1
 ```
 Observar que foi criada uma interfadce virtual chamada Port-channel 1
 Toda mudança é feita na porta "Port-channel 1"
+
+
+##Access Control List (ACL)
+
+**Verificar as ACLs**
+```
+#show access-lists
+```
+**Verificar em qual porta esta aplicada a ACL**
+```
+show running-config
+```
+
+**Atrelar ACL a interface**
+```
+interface serial 0/0/0
+ip access-group 11 out
+```
+**Remover ACL da interface**
+```
+interface serial 0/0/0
+no ip access-group 11 out
+```
+**Criar ACL Numerica**
+```
+access-list 100 permit tcp 192.168.0.0 0.0.0.255 range 1024 65535 host 172.16.30.2 eq www
+show access-lists 
+
+Standard IP access list 11
+    10 deny 192.168.10.0 0.0.0.255 (8 match(es))
+    20 permit any (7 match(es))
+```
+
+**Criar e nomear ACL numerica**
+```
+(config)#access-list 1 remark Rede_LAN_S1
+(config)#access-list 1 permit 192.168.10.0 0.0.0.255
+(config)#access-list 1 deny any
+(config)#do show access-list
+```
+**Criar ACL Padrão nomeada**
+```
+ip access-list standard NO_ACCESS
+(config-std-nacl)#20 permit any
+(config-std-nacl)#10 deny host 192.168.11.10
+```
+
+**Proteção Login com ACL**
+```
+line vty 0 4
+login local
+transport input ssh
+access-class 21 in
+exit
+access-list 21 permit 192.168.10.0 0.0.0.255
+access-list 21 deny any
+```
