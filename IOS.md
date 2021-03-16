@@ -356,7 +356,7 @@ ou
 (config)#spanning-tree vlan [id's-da-vlan] root primary
 ```
 
-##Etherchannel
+## Etherchannel
 
 **Visualizar Portas**
 ```
@@ -428,7 +428,7 @@ Observar que foi criada uma interfadce virtual chamada Port-channel 1
 Toda mudança é feita na porta "Port-channel 1"
 
 
-##Access Control List (ACL)
+## Access Control List (ACL)
 
 **Verificar as ACLs**
 ```
