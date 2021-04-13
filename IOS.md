@@ -483,3 +483,94 @@ exit
 access-list 21 permit 192.168.10.0 0.0.0.255
 access-list 21 deny any
 ```
+
+
+
+Verificar outside e inside em alguma interface
+#show run
+
+Verificar rotas
+```
+#show ip nat statistics
+```
+Ver Traduções
+```
+#show ip nat translations
+Pro  Inside global     Inside local       Outside local      Outside global
+---  64.100.50.1       172.16.16.1        ---                ---
+```
+**Exemplo show run NAT**
+```
+#show run
+interface GigabitEthernet0/0
+ ip address 172.16.16.14 255.255.255.240
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ ip address 209.165.128.130 255.255.255.248
+ ip nat outside
+!
+```
+
+**Ver tipos de NAT ativos**
+```
+#show ip nat statistics
+Total translations: 1 (1 static, 0 dynamic, 0 extended)
+Outside Interfaces: Serial0/0/0
+Inside Interfaces: GigabitEthernet0/0
+```
+
+**Criar NAT Dinâmico**
+
+Passo 1 - ACL
+```
+ip access-list standard [Nome da ACL]
+permit [IP]
+```
+Passo 2 - Criar NAT Pool 
+```
+ip nat pool [Nome da NAT Pool] [ip inicial] [ip final] [mascara da rede]  
+(exemplo: ip nat pool NAT_LAN 192.168.0.1 192.168.0.15 255.255.255.0)
+```
+
+Passo 3 - Criação NAT Dinamico
+```
+ip nat inside source list LAN pool Intervalo-IPs-WAN
+
+```
+
+**Criar PAT**
+
+Passo 1 - Criar Pool com Unico Endereço
+```
+ip nat pool IP-WAN-PAT 200.0.0.103
+```
+Passo 2 - Criar ACL
+```
+ip access-list standard PAT
+permit 192.168.1.0 0.0.0.255
+```
+
+Passo 3 - Criar regra PAT aplicando na Interface
+```
+ip nat inside source list PAT interface Serial 0/0/0 orverload
+```
+
+
+Criar NAT Estatico (static) usando todas as porta
+```
+ip nat inside source static 192.168.2.100 200.0.0.100
+```
+
+**Criar NAT Estatico (static) usando portas especificas**
+```
+ip nat inside source static 192.168.2.100 80 200.0.0.3 8080
+```
+
+**Limpar tabela de NAT**
+```
+#clear ip nat translation *
+STATIC sempre esta lá fixo
+```
