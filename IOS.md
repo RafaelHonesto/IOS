@@ -441,18 +441,33 @@ show running-config
 
 **Atrelar ACL a interface**
 ```
-interface serial 0/0/0
-ip access-group 11 out
+(config)# interface 
+(config-if)# ip access-group [ID da ACL] [modo da ACL]
+
+Modo da ACL 
+pode ser in ou out
 ```
 **Remover ACL da interface**
 ```
-interface serial 0/0/0
-no ip access-group 11 out
+(config)#interface serial 0/0/0
+(config-if)#no ip access-group [ID] [Modo]
 ```
 **Criar ACL Numerica**
 ```
-access-list 100 permit tcp 192.168.0.0 0.0.0.255 range 1024 65535 host 172.16.30.2 eq www
-show access-lists 
+(config)#access-list [ID da ACL] permit/deny [Protocolo IP] [IP da rede origem] [Mascara curinga da rede] [Range da porta de origem] [IP de destino] [portas destino]
+
+
+Exemplo:
+(config)#access-list 100 permit tcp 192.168.0.0 0.0.0.255 range 1024 65535 host 172.16.30.2 eq www
+
+
+Deny: nega o acesso
+Permit: permite o acesso
+```
+**Ver lista de ACL**
+
+```
+#show access-lists 
 
 Standard IP access list 11
     10 deny 192.168.10.0 0.0.0.255 (8 match(es))
@@ -461,16 +476,19 @@ Standard IP access list 11
 
 **Criar e nomear ACL numerica**
 ```
+
+(config)#access-list [ID da ACL] remark [Nome da ACL]
+
+Exemplo:
 (config)#access-list 1 remark Rede_LAN_S1
-(config)#access-list 1 permit 192.168.10.0 0.0.0.255
-(config)#access-list 1 deny any
-(config)#do show access-list
+
 ```
 **Criar ACL Padrão nomeada**
 ```
-ip access-list standard NO_ACCESS
-(config-std-nacl)#20 permit any
-(config-std-nacl)#10 deny host 192.168.11.10
+(config)#ip acess-list standard [Nome da ACL]
+
+Exemplo:
+(config)#ip access-list standard NO_ACCESS
 ```
 
 **Proteção Login com ACL**
@@ -479,21 +497,18 @@ line vty 0 4
 login local
 transport input ssh
 access-class 21 in
-exit
-access-list 21 permit 192.168.10.0 0.0.0.255
-access-list 21 deny any
+
 ```
 
-
-
-Verificar outside e inside em alguma interface
+**Verificar outside e inside em alguma interface**
+```
 #show run
-
-Verificar rotas
+```
+**Verificar rotas**
 ```
 #show ip nat statistics
 ```
-Ver Traduções
+**Ver Traduções**
 ```
 #show ip nat translations
 Pro  Inside global     Inside local       Outside local      Outside global
