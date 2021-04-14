@@ -451,10 +451,10 @@ que as atualizações sejam de uma fonte conhecida.
 ¬ Selecionam hosts para permitir ou negar acesso aos serviços de rede.
 
 ```
-**Macara Curinga**
+**Máscara Curinga**
 
 ```
-ACL's utilizam a mascara curinga em suas configurações, elas nada mais são que os bits no utilizados das mascaras de rede normalmente usadas.
+ACL's utilizam a máscara curinga em suas configurações, elas são que os bits não utilizados das máscaras de rede normalmente usadas.
 
 Exemplo:
 Mascara de rede(MR) 255.255.255.0
@@ -462,8 +462,10 @@ Mascara Curinga(MC)  0.0.0.255
 
 MR 255.255.254.0
 MC 0.0.0.1.255
+
 ```
 **Onde posicionar as ACL's?**
+
 ```
 ¬ Por exemplo, o tráfego que será negado em um destino remoto não deve ser
 encaminhado usando recursos de rede na rota para esse destino.
@@ -572,6 +574,7 @@ access-class 21 in
 
 ```
 ## NAT 
+
 **Verificar outside e inside em alguma interface**
 ```
 #show run
