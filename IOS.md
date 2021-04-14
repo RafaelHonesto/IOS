@@ -430,6 +430,62 @@ Toda mudança é feita na porta "Port-channel 1"
 
 ## Access Control List (ACL)
 
+
+**Funções da ACL**
+
+```
+¬ Limitam o tráfego e aumentam o desempenho da rede.
+
+Ex: se a política corporativa não permite tráfego de vídeo na rede, as ACLs que
+bloqueiam tráfego de vídeo podem ser configuradas e aplicadas.
+
+Isso reduziria significativamente a carga da rede e aumentaria o desempenho da rede.
+
+¬ Fornecer controle de fluxo de tráfego.
+
+As ACLs podem restringir o fornecimento de atualizações de roteamento para garantir
+que as atualizações sejam de uma fonte conhecida.
+
+¬ Fornecer um nível básico de segurança para acesso à rede.
+¬ Filtram tráfego com base no tipo de tráfego.
+¬ Selecionam hosts para permitir ou negar acesso aos serviços de rede.
+
+```
+**Macara Curinga**
+
+```
+ACL's utilizam a mascara curinga em suas configurações, elas nada mais são que os bits no utilizados das mascaras de rede normalmente usadas.
+
+Exemplo:
+Mascara de rede(MR) 255.255.255.0
+Mascara Curinga(MC)  0.0.0.255
+
+MR 255.255.254.0
+MC 0.0.0.1.255
+```
+**Onde posicionar as ACL's?**
+```
+¬ Por exemplo, o tráfego que será negado em um destino remoto não deve ser
+encaminhado usando recursos de rede na rota para esse destino.
+
+Cada ACL deve ser posicionada onde há maior impacto sobre o aumento da
+eficiência. As regras são:
+
+* ACLs estendidas - Localize as ACLs estendidas o mais perto
+possível da origem de tráfego a ser filtrado.
+
+* Dessa forma, o tráfego não desejado é negado perto da rede de origem sem atravessar a
+infraestrutura de rede.
+
+* ACLs padrão - Como as ACLs padrão não especificam endereços de
+destino, coloque-as o mais perto possível do destino.
+
+Colocar uma ACL padrão na origem do tráfego impedirá, com eficiência, que o tráfego
+acesse todas as outras redes através da interface onde é aplicada a ACL.
+
+```
+
+
 **Verificar as ACLs**
 ```
 #show access-lists
@@ -454,16 +510,19 @@ pode ser in ou out
 ```
 **Criar ACL Numerica**
 ```
+(config)#access-list access-list-number [ deny | permit | remark ] fonte [ source-wildcard ][ log ]
+
 (config)#access-list [ID da ACL] permit/deny [Protocolo IP] [IP da rede origem] [Mascara curinga da rede] [Range da porta de origem] [IP de destino] [portas destino]
 
 
 Exemplo:
+Router(config)# access-list 20 permit 192.168.0.0 0.0.0.255
 (config)#access-list 100 permit tcp 192.168.0.0 0.0.0.255 range 1024 65535 host 172.16.30.2 eq www
 
 
-Deny: nega o acesso
-Permit: permite o acesso
+
 ```
+
 **Ver lista de ACL**
 
 ```
@@ -472,6 +531,12 @@ Permit: permite o acesso
 Standard IP access list 11
     10 deny 192.168.10.0 0.0.0.255 (8 match(es))
     20 permit any (7 match(es))
+    
+Deny: nega o acesso seguindo as configurações.
+Permit: permite o acesso seguindo as configurações.
+
+No exemplo acima, o router está negando o acesso da rede 192.168.10.0 e permitindo o acesso de qualquer outro IP.
+    
 ```
 
 **Criar e nomear ACL numerica**
@@ -500,6 +565,13 @@ access-class 21 in
 
 ```
 
+** Criar ACL Extendida Nomeada (Consigo filtrar protocolos de Transporte (TCP e UDP)**
+```
+
+(config)# ip access-list extended [Nome da ACL]
+
+```
+## NAT 
 **Verificar outside e inside em alguma interface**
 ```
 #show run
