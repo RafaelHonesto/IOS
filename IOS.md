@@ -662,11 +662,13 @@ Utiliza um ip global interno para cada ip local interno, 1 pra 1.
 
 **Criar NAT Estatico (static) usando todas as porta**
 ```
+(config)# ip nat inside/outside source static [IP local interno] [IP global interno]
 ip nat inside source static 192.168.2.100 200.0.0.100
 ```
 
 **Criar NAT Estatico (static) usando portas especificas**
 ```
+(config)# ip nat inside/outside source static [IP local interno] [Porta] [IP global interno]
 ip nat inside source static 192.168.2.100 80 200.0.0.3 8080
 ```
 
