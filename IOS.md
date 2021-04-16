@@ -567,10 +567,12 @@ access-class 21 in
 
 ```
 
-** Criar ACL Extendida Nomeada (Consigo filtrar protocolos de Transporte (TCP e UDP)**
+**Criar ACL Extendida Nomeada (Consigue filtrar protocolos de Transporte (TCP e UDP)**
 ```
 
 (config)# ip access-list extended [Nome da ACL]
+
+
 
 ```
 ## NAT 
