@@ -633,10 +633,11 @@ ip nat inside source list LAN pool Intervalo-IPs-WAN
 
 ```
 
-**Criar PAT**
+## PAT (Port Acess Translation)
 
 Um ip global interno para todos os ips internos, o que mudará será a porta por onde irá sair a conexão.
 
+Esse protocolo sempre terá "overload" ao fim da linha de comando.
 
 Passo 1 - Criar Pool com Unico Endereço
 ```
@@ -652,13 +653,14 @@ permit 192.168.1.0 0.0.0.255
 
 Passo 3 - Criar regra PAT aplicando na Interface
 ```
-(config)#ip nat inside source list [Nome da ACL] [interface] orverload
+(config)#ip nat inside source list [Nome da ACL] [interface] overload
 ```
 Passo 3a - Criar regra PAT com pool
 ```
-(config)#ip nat inside source list [Nome da ACL] pool [Nome da Pool]  orverload
+(config)#ip nat inside source list [Nome da ACL] pool [Nome da Pool]  overload
 ```
-NAT estatico e dinamico
+
+**NAT estatico**
 
 Utiliza um ip global interno para cada ip local interno, 1 pra 1.
 
